@@ -12,10 +12,10 @@ from TwitchLib.PubSub import TwitchPubSub
 #---------------------------
 #   [Required] Script Information
 #---------------------------
-ScriptName = "Twitch Channel Points SFX Trigger"
-Website = "https://www.twitch.tv/EncryptedThoughts"
-Description = "Script to trigger SFX on channel point reward redemptions."
-Creator = "EncryptedThoughts"
+ScriptName = "Twitch Channel Points To Cloudbot Loyalty"
+Website = "https://www.twitch.tv/taradinoc"
+Description = "Script to award Cloudbot loyalty points on channel point reward redemptions."
+Creator = "EncryptedThoughts + TaradinoC"
 Version = "1.0.0.0"
 
 #---------------------------
@@ -26,7 +26,6 @@ ReadMe = os.path.join(os.path.dirname(__file__), "README.txt")
 EventReceiver = None
 ThreadQueue = []
 CurrentThread = None
-PlayNextAt = datetime.datetime.now()
 
 #---------------------------------------
 # Classes
@@ -40,25 +39,15 @@ class Settings(object):
             self.EnableDebug = False
             self.Username = ""
             self.TwitchReward1Name = ""
-            self.SFX1Path = ""
-            self.SFX1Volume = 100
-            self.SFX1Delay = 10
+            self.Conversion1Amount = 10
             self.TwitchReward2Name = ""
-            self.SFX2Path = ""
-            self.SFX2Volume = 100
-            self.SFX2Delay = 10
+            self.Conversion2Amount = 10
             self.TwitchReward3Name = ""
-            self.SFX3Path = ""
-            self.SFX3Volume = 100
-            self.SFX3Delay = 10
+            self.Conversion3Amount = 10
             self.TwitchReward4Name = ""
-            self.SFX4Path = ""
-            self.SFX4Volume = 100
-            self.SFX4Delay = 10
+            self.Conversion4Amount = 10
             self.TwitchReward5Name = ""
-            self.SFX5Path = ""
-            self.SFX5Volume = 100
-            self.SFX5Delay = 10
+            self.Conversion5Amount = 10
 
     def Reload(self, jsondata):
         self.__dict__ = json.loads(jsondata, encoding="utf-8")
@@ -126,24 +115,27 @@ def EventReceiverRewardRedeemed(sender, e):
     if ScriptSettings.EnableDebug:
         Parent.Log(ScriptName, "Event triggered")
     if e.RewardTitle == ScriptSettings.TwitchReward1Name:
-        ThreadQueue.append(threading.Thread(target=RewardRedeemedWorker,args=(ScriptSettings.SFX1Path, ScriptSettings.SFX1Volume, ScriptSettings.SFX1Delay,)))
+        ThreadQueue.append(threading.Thread(target=RewardRedeemedWorker,args=(e, ScriptSettings.Conversion1Amount,)))
     if e.RewardTitle == ScriptSettings.TwitchReward2Name:
-        ThreadQueue.append(threading.Thread(target=RewardRedeemedWorker,args=(ScriptSettings.SFX2Path, ScriptSettings.SFX2Volume, ScriptSettings.SFX2Delay,)))
+        ThreadQueue.append(threading.Thread(target=RewardRedeemedWorker,args=(e, ScriptSettings.Conversion2Amount,)))
     if e.RewardTitle == ScriptSettings.TwitchReward3Name:
-        ThreadQueue.append(threading.Thread(target=RewardRedeemedWorker,args=(ScriptSettings.SFX3Path, ScriptSettings.SFX3Volume, ScriptSettings.SFX3Delay,)))
+        ThreadQueue.append(threading.Thread(target=RewardRedeemedWorker,args=(e, ScriptSettings.Conversion3Amount,)))
     if e.RewardTitle == ScriptSettings.TwitchReward4Name:
-        ThreadQueue.append(threading.Thread(target=RewardRedeemedWorker,args=(ScriptSettings.SFX4Path, ScriptSettings.SFX4Volume, ScriptSettings.SFX4Delay,)))
+        ThreadQueue.append(threading.Thread(target=RewardRedeemedWorker,args=(e, ScriptSettings.Conversion4Amount,)))
     if e.RewardTitle == ScriptSettings.TwitchReward5Name:
-        ThreadQueue.append(threading.Thread(target=RewardRedeemedWorker,args=(ScriptSettings.SFX5Path, ScriptSettings.SFX5Volume, ScriptSettings.SFX5Delay,)))
+        ThreadQueue.append(threading.Thread(target=RewardRedeemedWorker,args=(e, ScriptSettings.Conversion5Amount,)))
     return
 
-def RewardRedeemedWorker(path, volume, delay):
+def RewardRedeemedWorker(e, amount):
+    user = e.Login
+    status = e.Status
     if ScriptSettings.EnableDebug:
-        Parent.Log(ScriptName, path + " " + str(volume) + " " + str(delay))
+        Parent.Log(ScriptName, "redeeming " + str(amount) + " for " + user + ": " + status)
 
-    Parent.PlaySound(path, volume/100)
-    global PlayNextAt
-    PlayNextAt = datetime.datetime.now() + datetime.timedelta(0, delay)
+    if status == "UNFULFILLED":
+        Parent.SendStreamMessage("!addpoints %s %d" % (user, amount))
+    #global PlayNextAt
+    #PlayNextAt = datetime.datetime.now() + datetime.timedelta(0, delay)
 
 
 #---------------------------
@@ -157,9 +149,9 @@ def Execute(data):
 #---------------------------
 def Tick():
 
-    global PlayNextAt
-    if PlayNextAt > datetime.datetime.now():
-        return
+    #global PlayNextAt
+    #if PlayNextAt > datetime.datetime.now():
+    #    return
 
     global CurrentThread
     if CurrentThread and CurrentThread.isAlive() == False:
@@ -167,7 +159,7 @@ def Tick():
 
     if CurrentThread == None and len(ThreadQueue) > 0:
         if ScriptSettings.EnableDebug:
-            Parent.Log(ScriptName, "Starting new thread. " + str(PlayNextAt))
+            Parent.Log(ScriptName, "Starting new thread.")
         CurrentThread = ThreadQueue.pop(0)
         CurrentThread.start()
         

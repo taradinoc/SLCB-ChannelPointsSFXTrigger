@@ -14,59 +14,11 @@
 		"tooltip": "Specify the name of the Twitch Reward that will trigger this event when detected.",
 		"group": "Twitch Reward 1 Event"
 	},
-	"SFX1Path": {
-		"type": "textbox",
-		"value": "",
-		"label": "Path to SFX file",
-		"tooltip": "Specify the path to the SFX effect to trigger.",
-		"group": "Twitch Reward 1 Event"
-	},
-	"SFX1Volume": {
-		"type": "slider",
-		"label": "SFX Volume",
-		"value": 100,
-		"min": 0,
-		"max": 100,
-		"ticks": 1,
-		"tooltip": "Specify the volume to the SFX effect to trigger.",
-		"group": "Twitch Reward 1 Event"
-	},
-	"SFX1Delay": {
-		"type": "numberbox",
-		"label": "SFX Delay in Seconds",
-		"value": 10,
-		"tooltip": "Specify the number of seconds to wait before attempting to play next SFX in queue after starting to play this SFX.",
-		"group": "Twitch Reward 1 Event"
-	},
 	"TwitchReward2Name": {
 		"type": "textbox",
 		"value": "",
 		"label": "Title of Twitch Reward",
 		"tooltip": "Specify the name of the Twitch Reward that will trigger this event when detected.",
-		"group": "Twitch Reward 2 Event"
-	},
-	"SFX2Path": {
-		"type": "textbox",
-		"value": "",
-		"label": "Path to SFX file",
-		"tooltip": "Specify the path to the SFX effect to trigger.",
-		"group": "Twitch Reward 2 Event"
-	},
-	"SFX2Volume": {
-		"type": "slider",
-		"label": "SFX Volume",
-		"value": 100,
-		"min": 0,
-		"max": 100,
-		"ticks": 1,
-		"tooltip": "Specify the volume to the SFX effect to trigger.",
-		"group": "Twitch Reward 2 Event"
-	},
-	"SFX2Delay": {
-		"type": "numberbox",
-		"label": "SFX Delay in Seconds",
-		"value": 10,
-		"tooltip": "Specify the number of seconds to wait before attempting to play next SFX in queue after starting to play this SFX.",
 		"group": "Twitch Reward 2 Event"
 	},
 	"TwitchReward3Name": {
@@ -76,59 +28,11 @@
 		"tooltip": "Specify the name of the Twitch Reward that will trigger this event when detected.",
 		"group": "Twitch Reward 3 Event"
 	},
-	"SFX3Path": {
-		"type": "textbox",
-		"value": "",
-		"label": "Path to SFX file",
-		"tooltip": "Specify the path to the SFX effect to trigger.",
-		"group": "Twitch Reward 3 Event"
-	},
-	"SFX3Volume": {
-		"type": "slider",
-		"label": "SFX Volume",
-		"value": 100,
-		"min": 0,
-		"max": 100,
-		"ticks": 1,
-		"tooltip": "Specify the volume to the SFX effect to trigger.",
-		"group": "Twitch Reward 3 Event"
-	},
-	"SFX3Delay": {
-		"type": "numberbox",
-		"label": "SFX Delay in Seconds",
-		"value": 10,
-		"tooltip": "Specify the number of seconds to wait before attempting to play next SFX in queue after starting to play this SFX.",
-		"group": "Twitch Reward 3 Event"
-	},
 	"TwitchReward4Name": {
 		"type": "textbox",
 		"value": "",
 		"label": "Title of Twitch Reward",
 		"tooltip": "Specify the name of the Twitch Reward that will trigger this event when detected.",
-		"group": "Twitch Reward 4 Event"
-	},
-	"SFX4Path": {
-		"type": "textbox",
-		"value": "",
-		"label": "Path to SFX file",
-		"tooltip": "Specify the path to the SFX effect to trigger.",
-		"group": "Twitch Reward 4 Event"
-	},
-	"SFX4Volume": {
-		"type": "slider",
-		"label": "SFX Volume",
-		"value": 100,
-		"min": 0,
-		"max": 100,
-		"ticks": 1,
-		"tooltip": "Specify the volume to the SFX effect to trigger.",
-		"group": "Twitch Reward 4 Event"
-	},
-	"SFX4Delay": {
-		"type": "numberbox",
-		"label": "SFX Delay in Seconds",
-		"value": 10,
-		"tooltip": "Specify the number of seconds to wait before attempting to play next SFX in queue after starting to play this SFX.",
 		"group": "Twitch Reward 4 Event"
 	},
 	"TwitchReward5Name": {
@@ -138,28 +42,39 @@
 		"tooltip": "Specify the name of the Twitch Reward that will trigger this event when detected.",
 		"group": "Twitch Reward 5 Event"
 	},
-	"SFX5Path": {
-		"type": "textbox",
-		"value": "",
-		"label": "Path to SFX file",
-		"tooltip": "Specify the path to the SFX effect to trigger.",
-		"group": "Twitch Reward 5 Event"
-	},
-	"SFX5Volume": {
-		"type": "slider",
-		"label": "SFX Volume",
-		"value": 100,
-		"min": 0,
-		"max": 100,
-		"ticks": 1,
-		"tooltip": "Specify the volume to the SFX effect to trigger.",
-		"group": "Twitch Reward 5 Event"
-	},
-	"SFX5Delay": {
+	"Conversion1Amount": {
 		"type": "numberbox",
-		"label": "SFX Delay in Seconds",
 		"value": 10,
-		"tooltip": "Specify the number of seconds to wait before attempting to play next SFX in queue after starting to play this SFX.",
+		"label": "Loyalty point value",
+		"tooltip": "Specify the number of loyalty points to award.",
+		"group": "Twitch Reward 1 Event"
+	},
+	"Conversion2Amount": {
+		"type": "numberbox",
+		"value": 10,
+		"label": "Loyalty point value",
+		"tooltip": "Specify the number of loyalty points to award.",
+		"group": "Twitch Reward 2 Event"
+	},
+	"Conversion3Amount": {
+		"type": "numberbox",
+		"value": 10,
+		"label": "Loyalty point value",
+		"tooltip": "Specify the number of loyalty points to award.",
+		"group": "Twitch Reward 3 Event"
+	},
+	"Conversion4Amount": {
+		"type": "numberbox",
+		"value": 10,
+		"label": "Loyalty point value",
+		"tooltip": "Specify the number of loyalty points to award.",
+		"group": "Twitch Reward 4 Event"
+	},
+	"Conversion5Amount": {
+		"type": "numberbox",
+		"value": 10,
+		"label": "Loyalty point value",
+		"tooltip": "Specify the number of loyalty points to award.",
 		"group": "Twitch Reward 5 Event"
 	},
 	"btnreadme": {
